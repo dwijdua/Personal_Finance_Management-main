@@ -1,0 +1,140 @@
+<html lang="en" class="js-focus-visible" data-js-focus-visible="">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Personal Finance Management</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="../static/css/main.css">
+      <script src="https://code.jquery.com/jquery-2.2.1.min.js" crossorigin="anonymous"></script> 
+   </head>
+   <body data-new-gr-c-s-check-loaded="14.1015.0" data-gr-ext-installed="" cz-shortcut-listen="true" style="">
+      <div class="backdrop"></div>
+      <header class="main-header">
+         <button id="side-menu-toggle">Menu</button> 
+         <nav class="main-header__nav">
+            <center style=" margin: auto 577px; color: white; "> Welcome to the Personal Finance Management Expert System!</center>
+         </nav>
+      </header>
+      <main>
+         <div class="grid">
+            <article class="card product-item">
+               <header class="card__header">
+                  <h1 class="product__title">Evaluate your finance!</h1>
+               </header>
+               <div class="card__content">
+                  <p class="product__description">We will ask 21 question and provide you the financial advice.</p>
+               </div>
+               <div class="card__actions">
+<!--                  <form action="/predict_file" id="classify" method="POST" enctype="multipart/form-data"> -->
+                <form action="{{ url_for('predict')}}" id="classify" method="POST" enctype="multipart/form-data"> 
+					What is you age? </br>
+					<input type="number" name="age" placeholder="Age" required="required" class=""></br>
+					What is your Net income exclude the Tax?</br>
+					<input type="number" name="income" placeholder="Income" required="required" class="">
+					</br></br><h3>-----Questions related to Needs-----</h3></br></br>
+					How much you spend on grocery?</br>
+					<input type="number" name="food" placeholder="Food" required="required" class=""></br>
+					How much you spend on home rent?</br>
+					<input type="number" name="rent" placeholder="Rent" required="required" class=""> </br>
+					How much you spend on the health insurance?</br>
+					<input type="number" name="health_insurance" placeholder="Health Insurance" required="required" class=""></br>
+					How much you spend on Bills and utilities?</br>
+					<input type="number" name="bills_utilities" placeholder="Bills Utilities" required="required" class=""></br>
+					How much you spend on transportation_service?</br>
+					<input type="number" name="transportation" placeholder="Transportation" required="required" class=""></br>
+					How much you spend on basic clothes?</br>
+					<input type="number" name="basic_clothes" placeholder="Basic_clothes" required="required" class=""></br>
+					</br></br><h3>-----Questions related to Wants-----</h3></br></br>
+					How much you spend on Vacantions?</br>
+					<input type="number" name="vacations" placeholder="Vacations" required="required" class=""></br>
+					How much you spend on home Trips?</br>
+					<input type="number" name="trips" placeholder="Trips" required="required" class=""></br>
+					How much you spend on the Expensive clothes?</br>
+					<input type="number" name="expensive_clothes" placeholder="Expensive_clothes" required="required" class=""></br>
+					How much you spend on Consumer electronics?</br>
+					<input type="number" name="consumer_electronics" placeholder="Consumer_electronics" required="required" class=""></br>
+					How much you spend on dinig out?</br>
+					<input type="number" name="dining_out" placeholder="Dining_out" required="required" class=""></br>
+					How much you spend on Entertainment?</br>
+					<input type="number" name="entertainment" placeholder="Entertainment" required="required" class=""></br>
+					How much you spend on Hobbies?</br>
+					<input type="number" name="hobbies" placeholder="Hobbies" required="required" class=""></br>
+					</br></br><h3>-----Questions related to Savings-----</h3></br></br>
+					How much you spend on Real estate?</br>
+					<input type="number" name="real_estate" placeholder="Real_estate" required="required" class=""></br>
+					How much you spend on Stocks?</br>
+					<input type="number" name="stocks" placeholder="Stocks" required="required" class=""></br>
+					How much you spend on the Mutalfunds?</br>
+					<input type="number" name="mutalfunds" placeholder="Mutalfunds" required="required" class=""></br>
+					How much you spend on Pf_retirement?</br>
+					<input type="number" name="pf_retirement" placeholder="Pf_retirement" required="required" class=""></br>
+					How much you spend on Fixed_deposit?</br>
+					<input type="number" name="fixed_deposit" placeholder="Fixed_deposit" required="required" class=""></br>
+					<button class="btn" type="submit">Fruitful Advice</button> 
+				</form>
+               </div>
+               <div class="card__content" id="result"> </div>
+            </article>
+         </div>
+      </main>
+	<script> 
+	$(document).ready(function() {
+    $("#classify").on("submit", function(e) {
+        e.preventDefault();
+        var fd = new FormData();
+        fd.append("fixed_deposit", $("input[name=fixed_deposit]").val());
+        fd.append("pf_retirement", $("input[name=pf_retirement]").val());
+        fd.append("mutalfunds", $("input[name=mutalfunds]").val());
+        fd.append("stocks", $("input[name=stocks]").val());
+        fd.append("real_estate", $("input[name=real_estate]").val());
+        fd.append("hobbies", $("input[name=hobbies]").val());
+        fd.append("entertainment", $("input[name=entertainment]").val());
+        fd.append("dining_out", $("input[name=dining_out]").val());
+        fd.append("consumer_electronics", $("input[name=consumer_electronics]").val());
+        fd.append("trips", $("input[name=trips]").val());
+        fd.append("vacations", $("input[name=vacations]").val());
+        fd.append("basic_clothes", $("input[name=basic_clothes]").val());
+        fd.append("transportation", $("input[name=transportation]").val());
+        fd.append("bills_utilities", $("input[name=bills_utilities]").val());
+        fd.append("health_insurance", $("input[name=health_insurance]").val());
+        fd.append("rent", $("input[name=rent]").val());
+        fd.append("food", $("input[name=food]").val());
+        fd.append("income", $("input[name=income]").val());
+        fd.append("expensive_clothes", $("input[name=expensive_clothes]").val());
+        fd.append("age", $("input[name=age]").val());
+        $.ajax({
+            url: "/predict",
+            contentType: false,
+            processData: false,
+            data: fd,
+            type: "POST",
+            success: function(data) {
+		console.log(data);
+				data.split("JAINAM").forEach(function(i) {
+					if(i.indexOf("Red") != -1){
+						$("#result").append("<p style='color:red;'>"+i+"</p>")
+					}
+					else if(i.indexOf("Appreciation") != -1){
+						$("#result").append("<p style='color:green;'>"+i+"</p>")
+					}
+					else{
+						$("#result").append("<p>"+i+"</p>")
+					}
+					if (i % 2 ==0){
+					$("#result").append("</br>")
+					}
+				})
+            },
+            error: function(XMLHttpRequest, textStatus) {
+                $("#result").html(`<p style="color: red" class="product__description">Some error</p>`);
+            }
+        })
+    })
+})
+	</script> 
+   </body>
+</html>
