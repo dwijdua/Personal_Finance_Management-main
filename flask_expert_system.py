@@ -29,43 +29,22 @@ def predict():
   Food=int(request.form['food'])
   Rent=int(request.form['rent'])
   Health_insurance=int(request.form['health_insurance'])
-  Bills_utilities=int(request.form['bills_utilities'])
-  Transportation=int(request.form['transportation'])
-  Basic_clothes=int(request.form['basic_clothes'])
   Vacations=int(request.form['vacations'])
-  Trips=int(request.form['trips'])
   Expensive_clothes=int(request.form['expensive_clothes'])
-  Consumer_electronics=int(request.form['consumer_electronics'])
-  Dining_out=int(request.form['dining_out'])
   Entertainment=int(request.form['entertainment'])
-  Hobbies=int(request.form['hobbies'])
   Real_estate=int(request.form['real_estate'])
   Stocks=int(request.form['stocks'])
-  Mutual_funds=int(request.form['mutalfunds'])
   Pf_retirement=int(request.form['pf_retirement'])
-  Fixed_deposit=int(request.form['fixed_deposit'])
-  print("here",Consumer_electronics)
-  finance = eps.finance_expert(age, Income, Food, Rent, Health_insurance, Bills_utilities, Transportation, Basic_clothes, Vacations, Trips, Expensive_clothes, Consumer_electronics, Dining_out, Entertainment, Hobbies, Real_estate, Stocks, Mutual_funds, Pf_retirement, Fixed_deposit)
+  finance = eps.finance_expert(age, Income, Food, Rent, Health_insurance,  Vacations, Expensive_clothes, Entertainment,Real_estate, Stocks, Pf_retirement)
   finance.int_to_category()
-  print("here1")
   engine = eps.personalfinancemanagement()
   engine.reset()
-  print("here11")
-  engine.declare(eps.Fixed_depositcheck(fdcheck=finance.Fixed_deposit_category))
   engine.declare(eps.Pf_retirementcheck(pfrcheck=finance.Pf_retirement_category))
-  engine.declare(eps.Mutalfundscheck(mulcheck=finance.Mutalfunds_category))
   engine.declare(eps.Stockscheck(stoccheck=finance.Stocks_category))
   engine.declare(eps.Real_estatecheck(realcheck=finance.Real_estate_category))
-  engine.declare(eps.Hobbiescheck(hobcheck=finance.Hobbies_category))
   engine.declare(eps.Entertainmentcheck(entcheck=finance.Entertainment_category))
-  engine.declare(eps.Dinig_outcheck(dincheck=finance.Dinig_out_category))
-  engine.declare(eps.Consumer_electronicscheck(conecheck=finance.Consumer_electronics_category))
   engine.declare(eps.Expensive_clothescheck(expccheck=finance.Expensive_clothes_category))
-  engine.declare(eps.Tripscheck(tripcheck=finance.Trips_category))
   engine.declare(eps.Vacationscheck(vaccheck=finance.Vacations_category))
-  engine.declare(eps.Basic_clothescheck(bccheck=finance.Basic_clothes_category))
-  engine.declare(eps.Transportationcheck(tcheck=finance.Transportation_category))
-  engine.declare(eps.Bills_utilitiescheck(bcheck=finance.Bills_utilities_category))
   engine.declare(eps.Health_insurancecheck(hcheck=finance.Health_insurance_category))
   engine.declare(eps.Rentcheck(rcheck=finance.Rent_category))
   engine.declare(eps.Foodcheck(fcheck=finance.Food_category))
@@ -74,18 +53,17 @@ def predict():
   engine.declare(eps.needcheck(ncheck=finance.needs_category))
   engine.declare(eps.Incomebase(inclas=finance.income_category))
   engine.declare(eps.planselection(age=finance.age_finance_category))
-  print("here1111")
+  
   out_str = ""
   for row in engine.run(generate=True):
     if type(row) == tuple:
       for in_row in range(0,len(row)):
-        out_str = out_str + "JAINAM" + row[in_row] + "JAINAM"
+        out_str = out_str + "AIDI" + row[in_row] + "AIDI"
     else:
-      out_str = out_str + "JAINAM" + row
+      out_str = out_str + "AIDI" + row
     out_str = out_str + " "
   # engine.age_junior
-  
-  print("here111111", out_str)
+
   return out_str
 
 if __name__=='__main__':
