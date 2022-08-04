@@ -1,5 +1,3 @@
-g
-
 import expert_personal_finance as eps
 
 from flask import Flask, request, jsonify, render_template
